@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container-fluid reg-background">
+    <div class="container-fluid bg-dark pt-5" style="height: 100%; width: 1000px; text-align: center;">
+        <img class="mt-5" width="30%" src="https://media.discordapp.net/attachments/718002735475064874/837953322866573332/Logo2x.png">
+        <div class="container-fluid mt-5 mb-5" style="width: 450px;">
+            <form action="/login" method="POST">
+                <div class="mb-3">
+                    <label class="form-label" style="color: white;">Username</label>
+                    <input type="text" class="form-control" name="username">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" style="color: white;">Password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <button type="submit" class="mt-3 btn btn-primary">Login</button>
+            </form>
+            <p class="mt-4" style="color: white;">
+                If you don't have any account <a href="/register">Register here..</a>
+            </p>
+            <a class="mt-5" href="/"><< Back to Home</a>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,75 @@
+body {
+    background-color: #0c0041;
+}
+
+.footer {
+    background-color: #0c0041;
+    left: 0;
+    bottom: 0;
+}
+
+/* Hover Dropdown */
+.nav-item .genre-menu { 
+    display: none !important; 
+}
+
+.nav-item:hover .genre-menu { 
+    display: block !important; 
+}
+/* ----------------------- */
+
+.dropdown-pull-right {
+    float: right !important;
+    right: 0;
+    left: auto;
+}
+
+.dropdown-pull-right>.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.liked-button {
+    background-color: rgba(43, 255, 114, 0.3);
+}
+
+.liked-button:active {
+    background-color:rgba(43, 255, 114);
+}
+
+.reg-background {
+    background-color: #0c0041;
+    position:absolute;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+#moviedesc {
+    font-size:2vw;
+}
+
+.swiper-container {
+    background-color: transparent;
+}
+
+.rank-no {
+    position: absolute;
+    color: #55ffb0;
+    font-size: 120px;
+    font-weight: bolder;
+    text-shadow: 6px 6px #000000;
+}
+

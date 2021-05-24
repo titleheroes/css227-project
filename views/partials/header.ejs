@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticketango</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            
+            <a class="navbar-brand" href="/"><img src="/images/ticketango.png" alt="logo" style="height: 50px;"></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link mx-3" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link mx-3" href="/cinemas">Cinema</a></li>
+                    <li class="nav-item"><a class="nav-link mx-3" href="/movies">Movies</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/" data-bs-toggle="dropdown">Genre</a>
+                        <ul class="dropdown-menu genre-menu" aria-labelledby="dropdown01">
+                            <li><a class="dropdown-item" href="/movies/genre/action">Action</a></li>
+                            <li><a class="dropdown-item" href="/movies/genre/comedy">Comedy</a></li>
+                            <li><a class="dropdown-item" href="/movies/genre/drama">Drama</a></li>
+                            <li><a class="dropdown-item" href="/movies/genre/thriller">Thriller</a></li>
+                            <li><a class="dropdown-item" href="/movies/genre/sci-fi">Sci-fi</a></li>
+                            <li><a class="dropdown-item" href="/movies/genre/fantasy">Fantasy</a></li>  
+                            <li><a class="dropdown-item" href="/movies/genre/anime">Anime</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" style="width: 250px;" action="/movies/search" method="POST">
+                    <input type="text" name="search" class="form-control form-control-dark" placeholder="Search Movies ...">
+                </form>
+                
+                <% if(!currentUser) { %>
+                <div class="text-end"></div>
+                    <a href="/login">
+                        <button type="button" class="btn btn-outline-light">Login</button>
+                    </a>
+                    <div class="mx-2"></div>
+                    <a href="/register">
+                        <button type="button" class="btn btn-info px-3">Register</button>
+                    </a>
+                </div>
+                <% } else if ( currentUser.priority == 'admin' ) { %>
+                <div class="dropdown text-end dropdown-pull-right btn-group">
+                    <a href="" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="<%= currentUser.picture %>" alt="mdo" width="32" height="32" class="rounded-circle">
+                        &nbsp; Admin
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li class="dropdown-item">Hello! <%= currentUser.username %></li>
+                        <li><a class="dropdown-item" href="/user/<%= currentUser._id %>">Profile</a></li>
+                        <li><a class="dropdown-item" href="/user/admin">Admin Control Panel</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                    </ul>
+                </div>
+                <% } else { %>
+                <div class="dropdown text-end dropdown-pull-right btn-group">
+                    <a href="" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="<%= currentUser.picture %>" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li class="dropdown-item">Hello! <%= currentUser.username %></li>
+                        <li><a class="dropdown-item" href="/user/<%= currentUser._id %>">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                    </ul>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </nav>

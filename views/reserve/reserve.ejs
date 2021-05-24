@@ -1,0 +1,33 @@
+<%- include('../partials/header.ejs') %>
+
+<!-- Banner -->
+<div class="container-fluid px-3" style="height: 75px; background-color: rgb(0, 0, 0);">
+    <div class="row">
+        <h5 class="col pt-4" style="color: white; text-transform: uppercase;">
+            &emsp;
+            <span class="dot" style="background-color: rgb(255, 0, 0); margin-bottom: 1px;"></span>
+            Current Showtime
+        </h5>
+        <div class="col-3 pt-2">
+            <img src="<%= Cinemas.logo %>" width="100px" style="float: right;">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid px-3 pt-3" style="height: 60px; background-color: rgb(26, 26, 26);">
+    <h5 style="color: white;">
+        &emsp;
+        Movies : <%= Movies.name %> , Cinemas : <%= Cinemas.name %>
+    </h5>
+</div>
+
+<!-- End of Banner -->
+
+<div class="container-fluid px-3 pt-3" style="height: 500px; background-color: rgb(61, 61, 61);">
+    <img src="<%= Movies.image %>" height="250px">
+</div>
+
+
+
+
+<%- include('../partials/footer.ejs') %>

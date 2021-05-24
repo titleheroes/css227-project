@@ -1,0 +1,55 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container-fluid" style="background-color: #0c0041;">
+    <div class="row">
+        <div class="col">
+            <img src="<%= Cinemas.image %>" width="850" height="450">
+        </div>
+        <div class="col pt-5 text-center">
+            <ul style="list-style-type: none; color: white;">
+                <div class="container-fluid" style="height: 220px;">
+                    <li class="mt-3 mb-5"><img src="<%= Cinemas.logo %>" width="350px" height="200px" style="object-fit: contain;"></li>
+                </div>
+                <div class="container-fluid" style="height: 150px;">
+                    <li><h5><%= Cinemas.slogan %></h5></li>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="height: 20px; background-color: #0c0041;"></div>
+</div>
+
+<!-- Now showing -->
+<!-- Banner -->
+<div class="container-fluid bg-dark px-3 pt-4" style="height: 75px;">
+    <h5 style="color: white; text-transform: uppercase;">
+        &emsp;
+        <span class="dot" style="background-color: rgb(255, 0, 0); margin-bottom: 1px;"></span>
+      Now showing
+    </h5>
+</div>
+<!-- End of Banner -->
+
+<!-- Poster -->
+<div class="swiper-container nowShowing px-4">
+    <div class="swiper-wrapper py-2">
+        <% Movies.forEach(function(movie){ %>
+            <div class="swiper-slide" style="width: 200px; height: 320px;">
+                <div class="card card-cover text-white bg-dark rounded-5 shadow-lg h-100">
+                    <a href="/reserve/<%= Cinemas._id %>/<%= movie._id %>">
+                        <img src="<%= movie.image %>" width="100%" height="250px" style="object-fit: cover;">
+                        <p  class="lh-1 text-center pt-2 mx-3 text-white text-shadow-1"
+                            style="font-size:calc(100% + 0.25vw + 0.25vh)">
+                            <%= movie.name %>
+                        </p>
+                    </a>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+<!-- End of Poster -->
+<!-- End of Now showing -->
+
+<%- include('../partials/footer.ejs') %>
