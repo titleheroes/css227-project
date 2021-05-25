@@ -1,6 +1,17 @@
 <%- include('../partials/header.ejs') %>
 
 <div class="container-fluid reg-background">
+    <% if ( error && error.length > 0 ) { %>
+        <div class="alert alert-danger" role="alert" style="position: absolute; width: 100%;">
+            <%= error %>
+        </div>
+    <% } %>
+    
+    <% if ( success && success.length > 0 ) { %>
+        <div class="alert alert-success" role="alert" style="position: absolute; width: 100%;">
+            <%= success %>
+        </div>
+    <% } %>
     <div class="container-fluid bg-dark pt-5" style="height: 100%; width: 1000px; text-align: center;">
         <img class="mt-5" width="30%" src="https://media.discordapp.net/attachments/718002735475064874/837953322866573332/Logo2x.png">
         <div class="container-fluid mt-5 mb-5" style="width: 450px;">

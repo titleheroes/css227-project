@@ -29,12 +29,12 @@
                 <div class="card card-cover text-white bg-dark rounded-5 shadow-lg">
                     <% if(!currentUser) {%>
                     <% } else if ( currentUser.priority == 'admin' ) { %>
-                        <div class="row" style="bottom: 15px; left: 48px; position: absolute;">
+                        <div class="row" style="bottom: 15px; left: 45px; position: absolute;">
                             <a class="col" href="/movies/<%= movie._id %>/edit">
-                                <button style="height: 45px; width: 65px;">Edit</button>
+                                <button class="btn btn-outline-light" style="height: 45px; width: 65px;">Edit</button>
                             </a>
                             <form class="col" action="/movies/<%= movie._id %>?_method=DELETE" method="POST">
-                                <button style="height: 45px; width: 65px;">Delete</button>
+                                <button class="btn btn-outline-light" style="height: 45px; width: 80px;">Delete</button>
                             </form>
                         </div>
                     <% } %>
