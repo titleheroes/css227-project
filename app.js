@@ -4,6 +4,7 @@ const   express         = require('express'),
         app             = express(),
         bodyParser      = require('body-parser'),
         mongoose        = require('mongoose'),
+        flash           = require('connect-flash'),
         passport        = require('passport'),
         LocalStrategy   = require('passport-local'),
         
@@ -20,6 +21,7 @@ var indexRoutes = require('./routes/index'),
 mongoose.connect('mongodb://localhost/Movies');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use(flash());
 app.set('view engine', 'ejs');
 // seedDB();
 
@@ -36,7 +38,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
-    res.locals.currentUser = req.user;
+    res.locals.currentUser  = req.user;
+    res.locals.error        = req.flash('error');
+    res.locals.success      = req.flash('success');
     next();
 });
 

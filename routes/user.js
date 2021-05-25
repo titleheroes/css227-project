@@ -81,7 +81,7 @@ router.get('/:id', isLoggedIn, function (req, res) {
     });
 });
 
-router.post('/:id', isLoggedIn, upload.single('image'), function (req, res) {
+router.post('/:id', isLoggedIn, upload.single('image'), function (req, res){
     User.findByIdAndUpdate(req.params.id,
         {
             picture: '/images/user/' + req.file.filename
