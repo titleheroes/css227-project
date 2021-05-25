@@ -21,11 +21,10 @@ middlewareObj.checkAdmin = function(req, res, next){
                 res.redirect('back');
             } else {
                 if( currentUser.priority == 'admin' ){
-                    next();
+                    return next();
                 }
             }
         });
-        return next();
     } else {
         res.redirect('back');
     }

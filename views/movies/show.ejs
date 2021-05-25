@@ -31,9 +31,9 @@
                 <% } else { %>
                 <div class="container-fluid mt-3" style="height: 50px;">
                     <!-- function for check that user like or not -->
-                    <% var match = 0; var lid = ''; %>
-                    <% User.likes.forEach(function(liked){ if ( liked.movies.id == Movies.id ) { match = 1; lid = liked._id; } }); %>
-                    <% if( match == 1 ) { %>
+                    <% var lid; %>
+                    <% currentUser.likes.forEach(function(liked){ if ( liked.movies.id == Movies.id ) { match = 1; lid = liked._id; } }); %>
+                    <% if( lid != null ) { %>
                         <form action="/movies/<%= lid %>/unlike" method="POST">
                             <button type="submit" class="btn btn-primary">Unlike</button>
                         </form>

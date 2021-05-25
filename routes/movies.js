@@ -137,17 +137,7 @@ router.get('/:id', function(req,res){
                 if(err){
                     console.log(err);
                 } else {
-                    if(req.isAuthenticated()){
-                        User.findById(req.user._id).exec(function(err, foundUsers){
-                            if(err){
-                                console.log(err);
-                            } else {
-                                res.render('./movies/show.ejs', {Movies: foundMovies, Cinemas: allCinemas, User: foundUsers});
-                            }
-                        });
-                    } else {
-                        res.render('./movies/show.ejs', {Movies: foundMovies, Cinemas: allCinemas});
-                    }
+                    res.render('./movies/show.ejs', {Movies: foundMovies, Cinemas: allCinemas});
                 }
             });
         }
