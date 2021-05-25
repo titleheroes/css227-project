@@ -17,6 +17,7 @@ var indexRoutes = require('./routes/index'),
     cinemasRoutes = require('./routes/cinema');
     commentRoutes = require('./routes/comment');
     reserveRoutes = require('./routes/reserve');
+    sessionRoutes = require('./routes/session');
     userRoutes = require('./routes/user');
 
 mongoose.connect('mongodb://localhost/Movies');
@@ -52,6 +53,7 @@ app.use('/movies', moviesRoutes);
 app.use('/cinemas', cinemasRoutes);
 app.use('/user', userRoutes);
 app.use('/reserve', reserveRoutes);
+app.use('/session', sessionRoutes);
 app.use('/movies/:id/comments', commentRoutes);
 
 app.listen(3000, function(){

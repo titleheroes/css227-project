@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var sessionSchema = new mongoose.Schema({
+    date : String,
     time: String,
     seats: {
         type: Array,
@@ -12,18 +13,9 @@ var sessionSchema = new mongoose.Schema({
         default: 8,
     },
      
-    cinema: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'cinema'
-        },
-    },
-    movies: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'movies'
-        },
-    },
+    cinema: String,
+    movies: String,
+
     reservation: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

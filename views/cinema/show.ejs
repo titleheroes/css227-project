@@ -37,7 +37,7 @@
         <% Movies.forEach(function(movie){ %>
             <div class="swiper-slide" style="width: 200px; height: 320px;">
                 <div class="card card-cover text-white bg-dark rounded-5 shadow-lg h-100">
-                    <a href="/reserve/<%= Cinemas._id %>/<%= movie._id %>">
+                    <a href="/session/<%= Cinemas._id %>/<%= movie._id %>">
                         <img src="<%= movie.image %>" width="100%" height="250px" style="object-fit: cover;">
                         <p  class="lh-1 text-center pt-2 mx-3 text-white text-shadow-1"
                             style="font-size:calc(100% + 0.25vw + 0.25vh)">

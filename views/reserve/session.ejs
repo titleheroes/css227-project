@@ -1,0 +1,124 @@
+<%- include('../partials/header.ejs') %>
+
+<% var weekday = new Array(7), month = new Array(12); %>
+<% weekday[0] = "Sun", weekday[1] = "Mon", weekday[2] = "Tues", weekday[3] = "Wed", weekday[4] = "Thurs", weekday[5] = "Fri", weekday[6] = "Sat"; %>
+<% month[0] = "Jan", month[1] = "Feb",month[2] = "Mar", month[3] = "Apr", month[4] = "May", month[5] = "June", month[6] = "July", month[7] = "Aug", month[8] = "Sept", month[9] = "Oct", month[10] = "Nov", month[11] = "Dec";  %>
+<% var Time1 = new Date() %>
+
+<% var Time2 = new Date(Time1) %>
+<% Time2.setDate(Time2.getDate() + 1) %>
+
+<% var Time3 = new Date(Time2) %>
+<% Time3.setDate(Time3.getDate() + 1) %>
+
+<% var Time4 = new Date(Time3) %>
+<% Time4.setDate(Time4.getDate() + 1) %>
+
+<% var Day1 = Time1.getDay(), Month1 = Time1.getMonth(), Date1 = Time1.getDate(); %>
+<% var D1 = weekday[Day1] + ' ' + Date1 + ' ' + month[Month1]; %>
+
+<% var Day2 = Time2.getDay(), Month2 = Time2.getMonth(), Date2 = Time2.getDate(); %>
+<% var D2 = weekday[Day2] + ' ' + Date2 + ' ' + month[Month2]; %>
+
+<% var Day3 = Time3.getDay(), Month3 = Time3.getMonth(), Date3 = Time3.getDate(); %>
+<% var D3 = weekday[Day3] + ' ' + Date3 + ' ' + month[Month3]; %>
+
+<% var Day4 = Time4.getDay(), Month4 = Time4.getMonth(), Date4 = Time4.getDate(); %>
+<% var D4 = weekday[Day4] + ' ' + Date4 + ' ' + month[Month4]; %>
+
+
+<!-- Banner -->
+<div class="container-fluid px-3" style="height: 75px; background-color: rgb(0, 0, 0);">
+    <div class="row">
+        <h5 class="col pt-4" style="color: white; text-transform: uppercase;">
+            &emsp;
+            <span class="dot" style="background-color: rgb(255, 0, 0); margin-bottom: 1px;"></span>
+            Current Showtime
+        </h5>
+        <div class="col-3 pt-2">
+            <img src="<%= Cinemas.logo %>" width="100px" style="float: right;">
+        </div>
+    </div>
+</div>
+
+<form action="/session/<%= Cinemas.id %>/<%= Movies.id %>" method="POST">
+    <div class="container-fluid px-1 pt-3" style="height: 70px; background-color: rgb(26, 26, 26);">
+        <h4 style="color: white;">
+            &emsp;
+            <select onchange="check(this.value)" id="selectDay" name="session[date]" id="day" required>
+                <option name="session[date]" value="<%= D1 %>"><%= D1 %></option>
+                <option name="session[date]" value="<%= D2 %>"><%= D2 %></option>
+                <option name="session[date]" value="<%= D3 %>"><%= D3 %></option>
+                <option name="session[date]" value="<%= D4 %>"><%= D4 %></option>
+            </select>
+        </h4>
+    </div>
+
+    <!-- End of Banner -->
+
+    <div class="container-fluid px-3 pt-3" style="height: 280px; background-color: rgb(61, 61, 61); position: relative;">
+        <img class="mx-3" src="<%= Movies.image %>" height="250px" style="display: inline-block;">
+        <h3 style="display: inline-block; position: absolute; top: 50px; color: white;"><%= Movies.name %></h3>
+        <h5 style="display: inline-block; position: absolute; top: 110px; color: rgb(189, 189, 189);">&nbsp;<span style="color: white;">Genre:</span> <%= Movies.genre %></h5>
+        <h5 style="display: inline-block; position: absolute; top: 150px; color: rgb(189, 189, 189);">&nbsp;<span style="color: white;">Director:</span> <%= Movies.director %></h5>
+        <h5 style="display: inline-block; position: absolute; top: 190px; color: rgb(189, 189, 189);">&nbsp;<span style="color: white;">Runtime:</span> <%= Movies.runtime %> minutes</h5>
+    </div>
+
+    <div class="container-fluid px-5 pt-3" style="height: 120px; background-color: rgb(41, 41, 41); position: relative;">
+            <button id="11" type="submit" name="session[time]" class="reserveTimeButton" value="11:00">11:00</button>
+            <button id="15" type="submit" name="session[time]" class="reserveTimeButton" value="15:00">15:00</button>
+            <button id="18" type="submit" name="session[time]" class="reserveTimeButton" value="18:00">18:00</button>
+            <button id="21" type="submit" name="session[time]" class="reserveTimeButton" value="21:00">21:00</button>
+    </div>
+</form>
+
+<script>
+    var weekday = new Array(7), month = new Array(12);
+    weekday[0] = "Sun", weekday[1] = "Mon", weekday[2] = "Tues", weekday[3] = "Wed", weekday[4] = "Thurs", weekday[5] = "Fri", weekday[6] = "Sat";
+    month[0] = "Jan", month[1] = "Feb",month[2] = "Mar", month[3] = "Apr", month[4] = "May", month[5] = "June", month[6] = "July", month[7] = "Aug", month[8] = "Sept", month[9] = "Oct", month[10] = "Nov", month[11] = "Dec";
+
+    var currentTime = new Date();
+    var hours = currentTime.getHours(), minutes = currentTime.getMinutes();
+    var todayDay = currentTime.getDay(), todayMonth = currentTime.getMonth(), todayDate = currentTime.getDate();
+    var today = weekday[todayDay] + ' ' + todayDate + ' ' + month[todayMonth];
+    var selectDay = document.getElementById("selectDay").value;
+
+    if ( today == selectDay ) {
+        if ( hours > 11 ){
+            document.getElementById("11").disabled = true;
+        }
+        if ( hours > 15 ){
+            document.getElementById("15").disabled = true;
+        }
+        if ( hours > 18 ){
+            document.getElementById("18").disabled = true;
+        }
+        if ( hours > 21 ){
+            document.getElementById("21").disabled = true;
+        }
+    }
+
+    function check(checkSelectDay) {
+        if ( today == checkSelectDay ) {
+            if ( hours > 11 ){
+                document.getElementById("11").disabled = true;
+            }
+            if ( hours > 15 ){
+                document.getElementById("15").disabled = true;
+            }
+            if ( hours > 18 ){
+                document.getElementById("18").disabled = true;
+            }
+            if ( hours > 21 ){
+                document.getElementById("21").disabled = true;
+            }
+        } else if ( today != checkSelectDay ) {
+            document.getElementById("11").disabled = false;
+            document.getElementById("15").disabled = false;
+            document.getElementById("18").disabled = false;
+            document.getElementById("21").disabled = false;
+        }
+    }
+</script>
+
+<%- include('../partials/footer.ejs') %>
