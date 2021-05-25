@@ -1,12 +1,13 @@
 var express     = require('express'),
     router      = express.Router({mergeParams: true}),
     passport    = require('passport'),
+    middleware = require('../middleware'),
     Session     = require('../models/session'),
     Movies      = require('../models/movies'),
     Cinemas     = require('../models/cinema'),
     User        = require('../models/user');
 
-router.get('/:cid/:mid', isLoggedIn, function(req, res){
+router.get('/:cid/:mid', middleware.isLoggedIn, function(req, res){
     Cinemas.findById(req.params.cid, function(err, foundCinemas){
         if(err){
             console.log(err);
@@ -21,12 +22,5 @@ router.get('/:cid/:mid', isLoggedIn, function(req, res){
         }
     });
 });
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect('/login');
-};
 
 module.exports = router;

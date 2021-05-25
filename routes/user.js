@@ -2,6 +2,7 @@ var express = require('express'),
     router = express.Router(),
     multer = require('multer'),
     path = require('path'),
+    middleware = require('../middleware'),
     storage = multer.diskStorage({
         destination: function (req, file, callback) {
             callback(null, './public/images/user/');
@@ -21,7 +22,7 @@ var express = require('express'),
 
 // ------------------ ADMIN ------------------
 
-router.get('/admin', isLoggedIn, function (req, res) {
+router.get('/admin', middleware.checkAdmin, function (req, res) {
     User.find({ priority: 'user' }, function (err, allUser) {
         if (err) {
             console.log(err);
@@ -31,41 +32,31 @@ router.get('/admin', isLoggedIn, function (req, res) {
     });
 });
 
-router.post('/admin/grant/:id', isLoggedIn, function (req, res) {
-    if (req.user.priority == 'admin') {
-        User.findByIdAndUpdate(req.params.id,
-            {
-                priority: 'admin'
-            },
-            function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("Updated User : ", result);
-                    res.redirect('back');
-                }
-            });
-    }
-    else { res.rendirect('back'); }
+router.post('/admin/grant/:id', middleware.checkAdmin, function (req, res) {
+    User.findByIdAndUpdate(req.params.id,{priority: 'admin'},function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Updated User : ", result);
+            res.redirect('back');
+        }
+    });
 });
 
-router.post('/admin/delete/:id', isLoggedIn, function (req, res) {
-    if (req.user.priority == 'admin') {
-        User.findByIdAndDelete(req.params.id, function (err, result) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("Deleted User : ", result);
-                res.redirect('back');
-            }
-        });
-    }
-    else { res.rendirect('back'); }
+router.post('/admin/delete/:id', middleware.checkAdmin, function (req, res) {
+    User.findByIdAndDelete(req.params.id, function(err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Deleted User : ", result);
+            res.redirect('back');
+        }
+    });
 });
 
 // ------------- END OF ADMIN ----------------
 
-router.get('/:id', isLoggedIn, function (req, res) {
+router.get('/:id', middleware.checkProfileOwner, function (req, res) {
     User.findById(req.params.id).exec(function (err, foundUsers) {
         if (err) {
             console.log(err);
@@ -81,7 +72,7 @@ router.get('/:id', isLoggedIn, function (req, res) {
     });
 });
 
-router.post('/:id', isLoggedIn, upload.single('image'), function (req, res){
+router.post('/:id', middleware.checkProfileOwner, upload.single('image'), function (req, res){
     User.findByIdAndUpdate(req.params.id,
         {
             picture: '/images/user/' + req.file.filename
@@ -95,14 +86,5 @@ router.post('/:id', isLoggedIn, upload.single('image'), function (req, res){
             }
         });
 });
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-};
-
-
 
 module.exports = router;

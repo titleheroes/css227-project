@@ -1,6 +1,7 @@
 var express     = require('express'),
     router      = express.Router(),
-    passport    = require('passport')
+    passport    = require('passport'),
+    middleware = require('../middleware'),
     Movies      = require('../models/movies'),
     User        = require('../models/user');
 
@@ -53,7 +54,7 @@ router.post('/login', passport.authenticate('local',
 
 router.get('/logout', function(req, res){
     req.logout();
-    res.redirect('back');
+    res.redirect('/');
 });
 
 module.exports = router;

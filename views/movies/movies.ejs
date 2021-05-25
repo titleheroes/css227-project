@@ -23,10 +23,21 @@
 
 <div class="container-fluid" style="background-color: #0c0041;">
     <div class="row row-cols-3 align-items-stretch py-2 mx-3">
-
+        
         <% Movies.forEach(function(movie){ %>
             <div class="col" style="width: 100%">
                 <div class="card card-cover text-white bg-dark rounded-5 shadow-lg">
+                    <% if(!currentUser) {%>
+                    <% } else if ( currentUser.priority == 'admin' ) { %>
+                        <div class="row" style="bottom: 15px; left: 48px; position: absolute;">
+                            <a class="col" href="/movies/<%= movie._id %>/edit">
+                                <button style="height: 45px; width: 65px;">Edit</button>
+                            </a>
+                            <form class="col" action="/movies/<%= movie._id %>?_method=DELETE" method="POST">
+                                <button style="height: 45px; width: 65px;">Delete</button>
+                            </form>
+                        </div>
+                    <% } %>
                     <a href="/movies/<%= movie._id %>">
                         <div class="row">
                             <div class="col-2 mx-3">
@@ -39,14 +50,14 @@
                     </a>
                 </div>
             </div>
+            
             &ebsp;
         <% }); %>
       </div>
 </div>
 
 <% if(!currentUser) {%>
-    <p></p>
-<% }else if ( currentUser.priority == 'admin' ) { %>
+<% } else if ( currentUser.priority == 'admin' ) { %>
     <div class="card card-cover text-white bg-dark rounded-5 shadow-lg p-2" style="height: 120px;">
         <p class="d-flex justify-content-center mt-4">
             <a href="/movies/new">

@@ -5,6 +5,7 @@ const   express         = require('express'),
         bodyParser      = require('body-parser'),
         mongoose        = require('mongoose'),
         flash           = require('connect-flash'),
+        methodOverride  = require('method-override'),
         passport        = require('passport'),
         LocalStrategy   = require('passport-local'),
         
@@ -21,9 +22,10 @@ var indexRoutes = require('./routes/index'),
 mongoose.connect('mongodb://localhost/Movies');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
 app.use(flash());
 app.set('view engine', 'ejs');
-// seedDB();
+//seedDB();
 
 //Settings Passport
 app.use(require('express-session')({

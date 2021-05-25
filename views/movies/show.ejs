@@ -64,6 +64,14 @@
                     <img src="<%= comment.author.picture %>" alt="mdo" width="32" height="32" class="rounded-circle">
                     <strong>&nbsp;<%= comment.author.username %></strong>
                 </p>
+                <% if(!currentUser) {%>
+                <% } else if ( currentUser.priority == 'admin' || currentUser._id.equals(comment.author.id) ) { %>
+                    <form action="/movies/<%= Movies._id %>/comments/<%= comment._id %>/?_method=DELETE" method="POST">
+                        <div class="container-fluid" style="position: relative;">
+                            <button type="submit" class="btn btn-danger" style="bottom: 15px; right: 0px; position: absolute;">Delete</button>
+                        </div>
+                    </form>
+                <% } %>
                 &emsp; <%= comment.text %>
                 <p class="pt-3 mb-3 text-end">
                     <%= comment.date %>
@@ -84,12 +92,15 @@
             <div class='container'>
                 <form action='/movies/<%= Movies._id %>/comments' method='POST'>
                     <label  class="form-label">Comment</label>
-                    <input type="text" class="form-control" name='comment[text]' placeholder='Comment'>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <input type="text" class="form-control" name='comment[text]' required="required" placeholder='Comment' style="height: 50px">
+                    <div class="container-fluid" style="position: relative;">
+                        <button type="submit" class="btn btn-primary" style="height: 50px; width: 200px; bottom: 0px; right: 0px; position: absolute;">Submit</button>
+                    </div>
                 </form>
             </div>
         <% } %>
     </div>
 </div>
+&nbsp;
 
 <%- include('../partials/footer.ejs') %>

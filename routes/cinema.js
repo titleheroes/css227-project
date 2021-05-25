@@ -1,5 +1,6 @@
 var express = require('express'),
     router  = express.Router(),
+    middleware = require('../middleware'),
     Cinemas  = require('../models/cinema');
     User    = require('../models/user');
 
