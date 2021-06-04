@@ -26,7 +26,7 @@ middlewareObj.checkAdmin = function(req, res, next){
                 req.flash('error', 'You can not acess this page!');
                 res.redirect('back');
             } else {
-                if( currentUser.priority == 'admin' ){
+                if( currentUser.priority === 'admin' || currentUser.priority === 'superadmin' ){
                     return next();
                 }
             }

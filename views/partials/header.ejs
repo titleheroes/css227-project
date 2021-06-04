@@ -56,7 +56,7 @@
                         <button type="button" class="btn btn-info px-3">Register</button>
                     </a>
                 </div>
-                <% } else if ( currentUser.priority == 'admin' ) { %>
+                <% } else if ( currentUser.priority == 'admin' || currentUser.priority == 'superadmin' ) { %>
                 <div class="dropdown text-end dropdown-pull-right btn-group">
                     <a href="" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="<%= currentUser.picture %>" alt="mdo" width="32" height="32" class="rounded-circle">

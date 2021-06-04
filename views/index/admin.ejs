@@ -7,6 +7,12 @@
         &nbsp;admin control panel
     </h5>
 </div>
+
+<div class="container-fluid px-1 pt-3" style="height: 70px; background-color: rgb(26, 26, 26);">
+    <h4 style="color: white;">
+        &emsp; User
+    </h4>
+</div>
 &ebsp;
 <% User.forEach(function(user){ %>
     <div style="width: 100%; padding-left: 400px; padding-right: 400px;">
@@ -17,7 +23,7 @@
                     <p class="mt-3" style="color: green;">priority : <%= user.priority %></p>
                     <div class="text-end mt-2">
                         <form action="/user/admin/grant/<%= user._id %>" method="POST">
-                            <button type="submit" class="btn btn-outline-light" style="width: 200px">Make Admin</button>
+                            <button type="submit" class="btn btn-outline-light" style="width: 200px">Grant Admin</button>
                         </form>
                         &nbsp;
                         <form action="/user/admin/delete/<%= user._id %>" method="POST">
@@ -30,5 +36,36 @@
     </div>
     &ebsp;
 <% }); %>
+<div class="container-fluid px-1 pt-3" style="height: 70px; background-color: rgb(26, 26, 26);">
+    <h4 style="color: white;">
+        &emsp; Admin
+    </h4>
+</div>
+&ebsp;
+<% if ( currentUser.priority == 'superadmin' ) { %>
+    <% Admin.forEach(function(user){ %>
+        <div style="width: 100%; padding-left: 400px; padding-right: 400px;">
+            <div class="card card-cover text-white bg-dark rounded-5 shadow-lg">
+                <div class="row">
+                    <img class="col-3" src="<%= user.picture %>" width="150px" height="150px">
+                    <h5 class="mt-3 mx-3 col" style="color: white; text-transform: uppercase;">
+                        <p class="mt-3" style="color: rgb(128, 0, 0);">priority : <%= user.priority %></p>
+                        <div class="text-end mt-2">
+                            <form action="/user/admin/forfeit/<%= user._id %>" method="POST">
+                                <button type="submit" class="btn btn-outline-light" style="width: 200px">Forfeit Admin</button>
+                            </form>
+                            &nbsp;
+                            <form action="/user/admin/delete/<%= user._id %>" method="POST">
+                                <button type="submit" class="btn btn-outline-light" style="width: 200px">Delete Account</button>
+                            </form>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        &ebsp;
+    <% }); %>
+<% } %>
+
 
 <%- include('../partials/footer.ejs') %>

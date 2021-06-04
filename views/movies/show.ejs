@@ -65,7 +65,7 @@
                     <strong>&nbsp;<%= comment.author.username %></strong>
                 </p>
                 <% if(!currentUser) {%>
-                <% } else if ( currentUser.priority == 'admin' || currentUser._id.equals(comment.author.id) ) { %>
+                <% } else if ( currentUser.priority == 'admin' || currentUser.priority == 'superadmin' || currentUser._id.equals(comment.author.id) ) { %>
                     <form action="/movies/<%= Movies._id %>/comments/<%= comment._id %>/?_method=DELETE" method="POST">
                         <div class="container-fluid" style="position: relative;">
                             <button type="submit" class="btn btn-danger" style="bottom: 15px; right: 0px; position: absolute;">Delete</button>

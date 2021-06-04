@@ -1,3 +1,4 @@
+/*   Pubilic   */
 body {
     background-color: #0c0041;
 }
@@ -6,42 +7,6 @@ body {
     background-color: #0c0041;
     left: 0;
     bottom: 0;
-}
-
-/* Hover Dropdown */
-.nav-item .genre-menu { 
-    display: none !important; 
-}
-
-.nav-item:hover .genre-menu { 
-    display: block !important; 
-}
-/* ----------------------- */
-
-.dropdown-pull-right {
-    float: right !important;
-    right: 0;
-    left: auto;
-}
-
-.dropdown-pull-right>.dropdown-menu {
-    right: 0;
-    left: auto;
-}
-
-.dot {
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.liked-button {
-    background-color: rgba(43, 255, 114, 0.3);
-}
-
-.liked-button:active {
-    background-color:rgba(43, 255, 114);
 }
 
 .reg-background {
@@ -57,6 +22,61 @@ a {
     text-decoration: none;
 }
 
+.dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.v-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+/*   End of Public   */
+
+
+
+/* Hover Nav-bar Dropdown */
+.nav-item .genre-menu { 
+    display: none !important; 
+}
+
+.nav-item:hover .genre-menu { 
+    display: block !important; 
+}
+/* End of Hover Nav-bar Dropdown */
+
+
+
+/*   Profile Dropdown   */
+.dropdown-pull-right {
+    float: right !important;
+    right: 0;
+    left: auto;
+}
+
+.dropdown-pull-right>.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+/*   End of Profile Dropdown   */
+
+
+
+/*   Movies   */
 #moviedesc {
     font-size:2vw;
 }
@@ -72,8 +92,12 @@ a {
     font-weight: bolder;
     text-shadow: 6px 6px #000000;
 }
+/*   End of Movies   */
 
-.reserveTimeButton {
+
+
+/*   Session   */
+.sessionTimeButton {
     display: inline-block;
     margin-top: 15px;
     margin-right: 50px;
@@ -83,3 +107,35 @@ a {
     font-size: 20px;
     font-weight: bolder;
 }
+/*   End of Session   */
+
+
+
+/*   Reserve   */
+.screen {
+    height: 20px; 
+    width: 800px; 
+    background-color: rgb(0, 0, 0);
+}
+.seat {
+    height: 60px;
+    width: 60px;
+}
+.seat-button {
+    background-color:transparent;
+    border: none;
+}
+.seat-block {
+    height: 500px;
+    width: 300px;
+    background-color: gray;
+    position: relative;
+}
+.seat-submit {
+    height: 50px;
+    width: 200px;
+    bottom: 0px;
+    right: 30px;
+    position: absolute;
+}
+/*   End of Session   */

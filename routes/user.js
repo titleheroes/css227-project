@@ -27,13 +27,30 @@ router.get('/admin', middleware.checkAdmin, function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render('./index/admin.ejs', { User: allUser });
+            User.find({ priority: 'admin' }, function (err, allAdmin) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render('./index/admin.ejs', { User: allUser, Admin: allAdmin });
+                }
+            });
         }
     });
 });
 
 router.post('/admin/grant/:id', middleware.checkAdmin, function (req, res) {
     User.findByIdAndUpdate(req.params.id,{priority: 'admin'},function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Updated User : ", result);
+            res.redirect('back');
+        }
+    });
+});
+
+router.post('/admin/forfeit/:id', middleware.checkAdmin, function (req, res) {
+    User.findByIdAndUpdate(req.params.id,{priority: 'user'},function (err, result) {
         if (err) {
             console.log(err);
         } else {

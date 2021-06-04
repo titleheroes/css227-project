@@ -9,7 +9,7 @@ var reserveSchema = new mongoose.Schema({
         username: String,
     },
 
-    rseat: Array,
+    seats: [String],
 
 });
 
