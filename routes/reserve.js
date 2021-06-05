@@ -36,7 +36,7 @@ router.post('/:id', middleware.isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            Reserve.create({}, function(err, reserve){
+            Reserve.create(req.body.reserve, function(err, reserve){
                 if(err){
                     console.log(err);
                 } else {
@@ -70,6 +70,9 @@ router.post('/:id', middleware.isLoggedIn, function(req, res){
                     if( req.body.B4 == 'y') {
                         reserveSeat('B4', reserve._id);
                     }
+
+                    res.redirect('/user/' + req.user._id + '/ticket');
+                    
                 }
             });
         }

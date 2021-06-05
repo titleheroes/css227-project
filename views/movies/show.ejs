@@ -9,97 +9,106 @@
                 allowfullscreen>
             </iframe>
         </div>
-        <div class="col text-center">
-            <ul style="list-style-type: none; color: white;">
-                <div class="container-fluid" style="height: 220px;">
-                    <li class="mt-3 mb-5"><img src="<%= Movies.logo %>" width="350px" height="200px" style="object-fit: contain;"></li>
+        <div class="col text-center pb-3" style="color: white;">
+            <div class="container-fluid" style="height: 220px; position: relative;">
+                <img class="center" src="<%= Movies.logo %>" width="350px" height="200px" style="object-fit: contain;">
+            </div>
+            <p><%= Movies.desc %></p>
+            <div class="row pt-3">
+                <div class="col-7">
+                    <p class="">Director:&emsp;<%= Movies.director %></p>
+                    <p class="">Release Date:&emsp;<%= Movies.date %></p>
                 </div>
-                <div class="container-fluid mt-3" style="height: 150px;">
-                    <div class="row mb-3">
-                        <li class="col" id="moviedesc"><h5>Director: <%= Movies.director %></h5></li>
-                        <li class="col" id="moviedesc"><h5>Release Date: <%= Movies.date %></h5></li>   
-                    </div>
-                    <div class="row">
-                        <li class="col" id="moviedesc"><h5>Runtime: <%= Movies.runtime %> minutes</h5></li>
-                        <li class="col" id="moviedesc"><h5>IMDB: <%= Movies.score %></h5></li>   
-                    </div>
+                <div class="col">
+                    <p class="">Runtime:&ensp;<%= Movies.runtime %> minutes</p>
+                    <p class="">IMDB:&emsp;<%= Movies.score %></p>
                 </div>
-                <% if(!currentUser) { %>
-                    <div class="container-fluid mt-3" style="height: 50px;">
-                        <p>hello</p>
-                    </div>
+            </div>
+            
+            <div class="container" style="height: 10px;"></div>
+            
+            <% if(!currentUser) { %>
+                <form action="/login">
+                    <button type="submit" class="btn btn-primary">Add to favourite</button>
+                </form>
+            <% } else { %>
+            <div class="container-fluid mt-3" style="height: 50px;">
+                <!-- function for check that user like or not -->
+                <% var lid; %>
+                <% currentUser.likes.forEach(function(liked){ if ( liked.movies.id == Movies.id ) { match = 1; lid = liked._id; } }); %>
+                <% if( lid != null ) { %>
+                    <form action="/movies/<%= lid %>/unlike" method="POST">
+                        <button type="submit" class="btn btn-primary">Remove from favourite</button>
+                    </form>
                 <% } else { %>
-                <div class="container-fluid mt-3" style="height: 50px;">
-                    <!-- function for check that user like or not -->
-                    <% var lid; %>
-                    <% currentUser.likes.forEach(function(liked){ if ( liked.movies.id == Movies.id ) { match = 1; lid = liked._id; } }); %>
-                    <% if( lid != null ) { %>
-                        <form action="/movies/<%= lid %>/unlike" method="POST">
-                            <button type="submit" class="btn btn-primary">Unlike</button>
-                        </form>
-                    <% } else { %>
-                        <form action="/movies/<%= Movies._id %>/like" method="POST">
-                            <button type="submit" class="btn btn-primary">Like</button>
-                        </form>
-                    <% } %>
-                </div>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-    <div class="container-fluid" style="background-color: #a38ffd; height: 345px;">
-        <!-- <button>
-            <a href="/reserve/<%= Movies._id %>/< cinema._id >">
-                reserve
-            </a>
-        </button> -->
-    </div>
-
-    <div class="container-fluid" style="height: 20px; background-color: #0c0041;"></div>
-
-    <div class="container-fluid">
-        <% Movies.comments.forEach(function(comment){ %>
-            <div class="card card-cover text-white bg-dark rounded-5 shadow-lg p-2" style="height: 120px;">
-                <p>
-                    <img src="<%= comment.author.picture %>" alt="mdo" width="32" height="32" class="rounded-circle">
-                    <strong>&nbsp;<%= comment.author.username %></strong>
-                </p>
-                <% if(!currentUser) {%>
-                <% } else if ( currentUser.priority == 'admin' || currentUser.priority == 'superadmin' || currentUser._id.equals(comment.author.id) ) { %>
-                    <form action="/movies/<%= Movies._id %>/comments/<%= comment._id %>/?_method=DELETE" method="POST">
-                        <div class="container-fluid" style="position: relative;">
-                            <button type="submit" class="btn btn-danger" style="bottom: 15px; right: 0px; position: absolute;">Delete</button>
-                        </div>
+                    <form action="/movies/<%= Movies._id %>/like" method="POST">
+                        <button type="submit" class="btn btn-primary">Add to favourite</button>
                     </form>
                 <% } %>
-                &emsp; <%= comment.text %>
-                <p class="pt-3 mb-3 text-end">
-                    <%= comment.date %>
-                </p>
             </div>
-            <div class="container-fluid" style="height: 20px; background-color: #0c0041;"></div>
-        <% }); %>
+            <% } %>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="height: 120px; background-color: rgb(41, 41, 41); position: relative;">
+    <div class="row">
+        <div class="col container-fluid" style="background-color: rgb(26, 26, 26); height: 120px; position: relative;">
+            <h3 class="center" style="color: white;">Reserve</h3>
+        </div>
+        <div class="col-10 pt-3 px-5">
+            <% Cinemas.forEach(function(cinema){ %>
+                &emsp;&emsp;
+                <a href="#"><img src="<%= cinema.logo %>" style="width: 150px; overflow: hidden;"></a>
+                &emsp;&emsp;&emsp;
+            <% }); %>
+        </div> 
+    </div>
+</div>
 
-        <% if(!currentUser) { %>
-            <div class="card card-cover text-white bg-dark rounded-5 shadow-lg p-2" style="height: 100px;">
-                <p class="d-flex justify-content-center mt-4">
-                    If you would like to comment please
-                    <a href="/login">&nbsp Login &nbsp</a> or <a href="/register">&nbsp Register &nbsp</a> here.
-                </p>
-                &emsp;
-            </div>
-        <% } else { %>
-            <div class='container'>
-                <form action='/movies/<%= Movies._id %>/comments' method='POST'>
-                    <label  class="form-label">Comment</label>
-                    <input type="text" class="form-control" name='comment[text]' required="required" placeholder='Comment' style="height: 50px">
+<div class="container-fluid" style="height: 20px; background-color: #0c0041;"></div>
+
+<div class="container-fluid">
+    <% Movies.comments.forEach(function(comment){ %>
+        <div class="card card-cover text-white bg-dark rounded-5 shadow-lg p-2" style="height: 120px;">
+            <p>
+                <img src="<%= comment.author.picture %>" alt="mdo" width="32" height="32" class="rounded-circle">
+                <strong>&nbsp;<%= comment.author.username %></strong>
+            </p>
+            <% if(!currentUser) {%>
+            <% } else if ( currentUser.priority == 'admin' || currentUser.priority == 'superadmin' || currentUser._id.equals(comment.author.id) ) { %>
+                <form action="/movies/<%= Movies._id %>/comments/<%= comment._id %>/?_method=DELETE" method="POST">
                     <div class="container-fluid" style="position: relative;">
-                        <button type="submit" class="btn btn-primary" style="height: 50px; width: 200px; bottom: 0px; right: 0px; position: absolute;">Submit</button>
+                        <button type="submit" class="btn btn-danger" style="bottom: 15px; right: 0px; position: absolute;">Delete</button>
                     </div>
                 </form>
-            </div>
-        <% } %>
-    </div>
+            <% } %>
+            &emsp; <%= comment.text %>
+            <p class="pt-3 mb-3 text-end">
+                <%= comment.date %>
+            </p>
+        </div>
+        <div class="container-fluid" style="height: 20px; background-color: #0c0041;"></div>
+    <% }); %>
+
+    <% if(!currentUser) { %>
+        <div class="card card-cover text-white bg-dark rounded-5 shadow-lg p-2" style="height: 100px;">
+            <p class="d-flex justify-content-center mt-4">
+                If you would like to comment please
+                <a href="/login">&nbsp Login &nbsp</a> or <a href="/register">&nbsp Register &nbsp</a> here.
+            </p>
+            &emsp;
+        </div>
+    <% } else { %>
+        <div class='container'>
+            <form action='/movies/<%= Movies._id %>/comments' method='POST'>
+                <label  class="form-label">Comment</label>
+                <input type="text" class="form-control" name='comment[text]' required="required" placeholder='Comment' style="height: 50px">
+                <div class="container-fluid" style="position: relative;">
+                    <button type="submit" class="btn btn-primary" style="height: 50px; width: 200px; bottom: 0px; right: 0px; position: absolute;">Submit</button>
+                </div>
+            </form>
+        </div>
+    <% } %>
 </div>
 &nbsp;
 

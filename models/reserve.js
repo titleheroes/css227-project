@@ -9,6 +9,18 @@ var reserveSchema = new mongoose.Schema({
         username: String,
     },
 
+    date : String,
+    time: String,
+    theater: Number,
+    cinemaName: String,
+    cinemaImage: String,
+    moviesName: String,
+    moviesImage: String,
+    boughtTime: {
+        type: Date,
+        default: Date.now
+    },
+
     seats: [String],
 
 });

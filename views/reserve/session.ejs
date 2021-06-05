@@ -41,6 +41,7 @@
     </div>
 </div>
 
+<!-- ------- Theater 1 ------- -->
 <form action="/session/<%= Cinemas.id %>/<%= Movies.id %>" method="POST">
     <div class="container-fluid px-1 pt-3" style="height: 70px; background-color: rgb(26, 26, 26);">
         <h4 style="color: white;">
@@ -51,26 +52,80 @@
                 <option name="session[date]" value="<%= D3 %>"><%= D3 %></option>
                 <option name="session[date]" value="<%= D4 %>"><%= D4 %></option>
             </select>
+            &emsp;
         </h4>
     </div>
 
     <!-- End of Banner -->
 
     <div class="container-fluid px-3 pt-3" style="height: 280px; background-color: rgb(61, 61, 61); position: relative;">
+        
         <img class="mx-3" src="<%= Movies.image %>" height="250px" style="display: inline-block;">
-        <h3 style="display: inline-block; position: absolute; top: 50px; color: white;"><%= Movies.name %></h3>
-        <h5 style="display: inline-block; position: absolute; top: 110px; color: rgb(189, 189, 189);">&nbsp;<span style="color: white;">Genre:</span> <%= Movies.genre %></h5>
-        <h5 style="display: inline-block; position: absolute; top: 150px; color: rgb(189, 189, 189);">&nbsp;<span style="color: white;">Director:</span> <%= Movies.director %></h5>
-        <h5 style="display: inline-block; position: absolute; top: 190px; color: rgb(189, 189, 189);">&nbsp;<span style="color: white;">Runtime:</span> <%= Movies.runtime %> minutes</h5>
+        
+        <h3 class="sessionMoviesTemplate" style="top: 50px; color: white;">
+            <%= Movies.name %>
+        </h3>
+
+        <h5 class="sessionMoviesTemplate" style="top: 110px; color: rgb(189, 189, 189);">
+            &nbsp;
+            <span style="color: white;">
+                Genre:
+            </span> 
+            <%= Movies.genre %>
+        </h5>
+
+        <h5 class="sessionMoviesTemplate" style="top: 150px; color: rgb(189, 189, 189);">
+            &nbsp;
+            <span style="color: white;">
+                Director:
+            </span> 
+            <%= Movies.director %>
+        </h5>
+
+        <h5 class="sessionMoviesTemplate" style="top: 190px; color: rgb(189, 189, 189);">
+            &nbsp;
+            <span style="color: white;">
+                Runtime:
+            </span> 
+            <%= Movies.runtime %> minutes
+        </h5>
+
     </div>
 
-    <div class="container-fluid px-5 pt-3" style="height: 120px; background-color: rgb(41, 41, 41); position: relative;">
-            <button id="11" type="submit" name="session[time]" class="sessionTimeButton" value="11:00">11:00</button>
-            <button id="15" type="submit" name="session[time]" class="sessionTimeButton" value="15:00">15:00</button>
-            <button id="18" type="submit" name="session[time]" class="sessionTimeButton" value="18:00">18:00</button>
-            <button id="21" type="submit" name="session[time]" class="sessionTimeButton" value="21:00">21:00</button>
+    <div class="container-fluid" style="height: 120px; background-color: rgb(41, 41, 41); position: relative;">
+        <div class="row">
+            <div class="col container-fluid" style="background-color: rgb(26, 26, 26); height: 120px; position: relative;">
+                <h3 class="center" style="color: white;">Theater 1</h3>
+            </div>
+            <div class="col-10 pt-3 px-5">
+                <button id="11" type="submit" name="session[time]" class="sessionTimeButton" value="11:00">11:00</button>
+                <button id="15" type="submit" name="session[time]" class="sessionTimeButton" value="15:00">15:00</button>
+                <button id="18" type="submit" name="session[time]" class="sessionTimeButton" value="18:00">18:00</button>
+                <button id="21" type="submit" name="session[time]" class="sessionTimeButton" value="21:00">21:00</button>
+            </div>  
+        </div>
     </div>
+    <input type="hidden" name="session[theater]" value="1">
 </form>
+<!-- ------- End of Theater 1 ------- -->
+
+<!-- ------- Theater 2 ------- -->
+<form action="/session/<%= Cinemas.id %>/<%= Movies.id %>" method="POST">
+    <div class="container-fluid" style="height: 120px; background-color: rgb(41, 41, 41); position: relative;">
+        <div class="row">
+            <div class="col container-fluid" style="background-color: rgb(26, 26, 26); height: 120px; position: relative;">
+                <h3 class="center" style="color: white;">Theater 2</h3>
+            </div>
+            <div class="col-10 pt-3 px-5">
+                <button id="13" type="submit" name="session[time]" class="sessionTimeButton" value="13:00">13:00</button>
+                <button id="16" type="submit" name="session[time]" class="sessionTimeButton" value="16:00">16:00</button>
+            </div>  
+        </div>
+    </div>
+    <input type="hidden" name="session[theater]" value="2">
+</form>
+<!-- ------- End of Theater 2 ------- -->
+
 
 <script>
     var weekday = new Array(7), month = new Array(12);
@@ -84,37 +139,51 @@
     var selectDay = document.getElementById("selectDay").value;
 
     if ( today == selectDay ) {
-        if ( hours > 11 ){
+        if ( hours == 11 && minutes > 15 || hours > 11 ){
             document.getElementById("11").disabled = true;
         }
-        if ( hours > 15 ){
+        if ( hours >= 13 && minutes > 15 || hours > 13 ){
+            document.getElementById("13").disabled = true;
+        }
+        if ( hours >= 15 && minutes > 15 || hours > 15 ){
             document.getElementById("15").disabled = true;
         }
-        if ( hours > 18 ){
+        if ( hours >= 16 && minutes > 15 || hours > 16 ){
+            document.getElementById("16").disabled = true;
+        }
+        if ( hours >= 18 && minutes > 15 || hours > 18 ){
             document.getElementById("18").disabled = true;
         }
-        if ( hours > 21 ){
+        if ( hours >= 21 && minutes > 15 || hours > 21 ){
             document.getElementById("21").disabled = true;
         }
     }
 
     function check(checkSelectDay) {
         if ( today == checkSelectDay ) {
-            if ( hours > 11 ){
+            if ( hours >= 11 && minutes > 15 || hours > 11 ){
                 document.getElementById("11").disabled = true;
             }
-            if ( hours > 15 ){
+            if ( hours >= 13 && minutes > 15 || hours > 13 ){
+                document.getElementById("13").disabled = true;
+            }
+            if ( hours >= 15 && minutes > 15 || hours > 15 ){
                 document.getElementById("15").disabled = true;
             }
-            if ( hours > 18 ){
+            if ( hours >= 16 && minutes > 15 || hours > 16 ){
+                document.getElementById("16").disabled = true;
+            }
+            if ( hours >= 18 && minutes > 15 || hours > 18 ){
                 document.getElementById("18").disabled = true;
             }
-            if ( hours > 21 ){
+            if ( hours >= 21 && minutes > 15 || hours > 21 ){
                 document.getElementById("21").disabled = true;
             }
         } else if ( today != checkSelectDay ) {
             document.getElementById("11").disabled = false;
+            document.getElementById("13").disabled = false;
             document.getElementById("15").disabled = false;
+            document.getElementById("16").disabled = false;
             document.getElementById("18").disabled = false;
             document.getElementById("21").disabled = false;
         }

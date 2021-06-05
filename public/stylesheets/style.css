@@ -28,6 +28,13 @@ a {
     border-radius: 50%;
     display: inline-block;
 }
+.big-dot {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
 
 .center {
     margin: 0;
@@ -77,10 +84,6 @@ a {
 
 
 /*   Movies   */
-#moviedesc {
-    font-size:2vw;
-}
-
 .swiper-container {
     background-color: transparent;
 }
@@ -97,10 +100,13 @@ a {
 
 
 /*   Session   */
+.sessionMoviesTemplate {
+    display: inline-block;
+    position: absolute;
+}
 .sessionTimeButton {
     display: inline-block;
-    margin-top: 15px;
-    margin-right: 50px;
+    margin-top: 10px;
     border-radius: 10px;
     height: 50px;
     width: 100px;
@@ -112,6 +118,9 @@ a {
 
 
 /*   Reserve   */
+.desc {
+    color: rgb(196, 196, 196);
+}
 .screen {
     height: 20px; 
     width: 800px; 

@@ -10,6 +10,7 @@ var moviesSchema = new mongoose.Schema({
     trailer: String,
 
     //  Desc
+    desc: String,
     genre: String,
     director: String,
     date: String,

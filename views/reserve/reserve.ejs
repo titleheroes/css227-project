@@ -123,17 +123,36 @@
             </div>
 
             <!-- Reservation -->
-            <div class="col-4 pt-5" style="margin-top: 120px;">
+            <div class="col-4 pt-5">
+                <div class="container-fluid pt-3 row" style="height: 275px; background-color: rgb(26, 26, 26);">
+                    <img class="col-5 mt-3" src="<%= Movies.image %>" style="height: 200px;">
+                    <div class="col mt-3">
+                        <h3 style="color: white;"><%= Movies.name %></h3>
+                        <h5 class="desc">Runtime: <%= Movies.runtime %> minutes</h5>
+                        <h5 class="desc">Cinema: <%= Cinemas.name %></h5>
+                        <h5 class="desc">Theater: <%= Session.theater %></h5>
+                        <h5 class="desc">Date: <%= Session.date %>&emsp;</h5>
+                        <button type="button" class="sessionTimeButton"><%= Session.time %></button>
+                    </div>
+                    
+                </div>
                 <h1>Reservation</h1>
                 <h3 style="color: gray;">Seat: <span id="seat"></span></h3>
                 <h3 style="color: gray;">Price: <span id="price"></span> Baht</h3>
                 <div style="position: relative; height: 80px;">
-                    <button type="submit" class="btn btn-primary seat-submit">Reserve</button>
+                    <button id="submit" type="submit" class="btn btn-primary seat-submit">Reserve</button>
                 </div>
             </div>
             <!-- End of Reservation -->
         </div>
     </div>
+    <input type="hidden" name="reserve[date]" value="<%= Session.date %>">
+    <input type="hidden" name="reserve[time]" value="<%= Session.time %>">
+    <input type="hidden" name="reserve[theater]" value="<%= Session.theater %>">
+    <input type="hidden" name="reserve[moviesName]" value="<%= Movies.name %>">
+    <input type="hidden" name="reserve[moviesImage]" value="<%= Movies.image %>">
+    <input type="hidden" name="reserve[cinemaName]" value="<%= Cinemas.name %>">
+    <input type="hidden" name="reserve[cinemaImage]" value="<%= Cinemas.logo %>">
 </form>
 <!-- End of Reservation Form -->
 
@@ -142,6 +161,13 @@
 
     document.getElementById("seat").innerHTML = seat;
     document.getElementById("price").innerHTML = price;
+
+    if ( seat > 0 ) {
+        document.getElementById('submit').disabled = false;
+    }
+    else if ( seat == 0 ) {
+        document.getElementById('submit').disabled = true;
+    }
 
     function reserve(selectedSeat) {
         if(document.getElementById('i' + selectedSeat).value == 'n'){
@@ -163,6 +189,13 @@
 
             document.getElementById("seat").innerHTML = seat;
             document.getElementById("price").innerHTML = price;
+        }
+
+        if ( seat > 0 ) {
+            document.getElementById('submit').disabled = false;
+        }
+        else if ( seat == 0 ) {
+            document.getElementById('submit').disabled = true;
         }
     }
 </script>

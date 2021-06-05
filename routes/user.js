@@ -18,7 +18,10 @@ var express = require('express'),
         callback(null, true);
     },
     upload = multer({ storage: storage, fileFilter: imageFilter }),
-    User = require('../models/user');
+
+    Session     = require('../models/session'),
+    Reserve     = require('../models/reserve'),
+    User        = require('../models/user');
 
 // ------------------ ADMIN ------------------
 
@@ -31,13 +34,14 @@ router.get('/admin', middleware.checkAdmin, function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.render('./index/admin.ejs', { User: allUser, Admin: allAdmin });
+                    res.render('./user/admin.ejs', { User: allUser, Admin: allAdmin });
                 }
             });
         }
     });
 });
 
+//  Grant Admin
 router.post('/admin/grant/:id', middleware.checkAdmin, function (req, res) {
     User.findByIdAndUpdate(req.params.id,{priority: 'admin'},function (err, result) {
         if (err) {
@@ -48,7 +52,9 @@ router.post('/admin/grant/:id', middleware.checkAdmin, function (req, res) {
         }
     });
 });
+// End of Grant Admin
 
+// Forfeit Admin
 router.post('/admin/forfeit/:id', middleware.checkAdmin, function (req, res) {
     User.findByIdAndUpdate(req.params.id,{priority: 'user'},function (err, result) {
         if (err) {
@@ -59,6 +65,7 @@ router.post('/admin/forfeit/:id', middleware.checkAdmin, function (req, res) {
         }
     });
 });
+// End of Forfeit Admin
 
 router.post('/admin/delete/:id', middleware.checkAdmin, function (req, res) {
     User.findByIdAndDelete(req.params.id, function(err, result) {
@@ -73,6 +80,24 @@ router.post('/admin/delete/:id', middleware.checkAdmin, function (req, res) {
 
 // ------------- END OF ADMIN ----------------
 
+router.get('/:id/ticket', middleware.checkProfileOwner, function (req, res) {
+    User.findById(req.params.id).exec(function (err, foundUsers) {
+        if (err) {
+            console.log(err);
+        } else {
+            Reserve.find({'user.id': req.params.id}).exec(function(err, foundReserve){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(foundReserve);
+                    res.render('./user/ticket.ejs', { User: foundUsers, Reserve: foundReserve });
+                }
+            });
+        }
+    });
+});
+
+// ------------------ Profile ------------------
 router.get('/:id', middleware.checkProfileOwner, function (req, res) {
     User.findById(req.params.id).exec(function (err, foundUsers) {
         if (err) {
@@ -82,13 +107,14 @@ router.get('/:id', middleware.checkProfileOwner, function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.render('./index/profile.ejs', { User: foundUsers, Movies: likedMovies });
+                    res.render('./user/profile.ejs', { User: foundUsers, Movies: likedMovies });
                 }
             });
         }
     });
 });
 
+//  Change profile pic
 router.post('/:id', middleware.checkProfileOwner, upload.single('image'), function (req, res){
     User.findByIdAndUpdate(req.params.id,
         {
@@ -103,5 +129,8 @@ router.post('/:id', middleware.checkProfileOwner, upload.single('image'), functi
             }
         });
 });
+//  End of Change profile pic
+
+// ------------- END OF Profile ----------------
 
 module.exports = router;

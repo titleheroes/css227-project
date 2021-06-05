@@ -63,7 +63,7 @@
                         &nbsp; Admin
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li class="dropdown-item">Hello! <%= currentUser.username %></li>
+                        <li><a class="dropdown-item" href="/user/<%= currentUser._id %>/ticket">My Ticket</a></li>
                         <li><a class="dropdown-item" href="/user/<%= currentUser._id %>">Profile</a></li>
                         <li><a class="dropdown-item" href="/user/admin">Admin Control Panel</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -76,7 +76,7 @@
                         <img src="<%= currentUser.picture %>" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li class="dropdown-item">Hello! <%= currentUser.username %></li>
+                        <li><a class="dropdown-item" href="/user/<%= currentUser._id %>/ticket">My Ticket</a></li>
                         <li><a class="dropdown-item" href="/user/<%= currentUser._id %>">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/logout">Sign out</a></li>
