@@ -89,7 +89,6 @@ router.get('/:id/ticket', middleware.checkProfileOwner, function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(foundReserve);
                     res.render('./user/ticket.ejs', { User: foundUsers, Reserve: foundReserve });
                 }
             });
