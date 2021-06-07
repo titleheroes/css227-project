@@ -53,12 +53,12 @@
 <div class="container-fluid" style="height: 120px; background-color: rgb(41, 41, 41); position: relative;">
     <div class="row">
         <div class="col container-fluid" style="background-color: rgb(26, 26, 26); height: 120px; position: relative;">
-            <h3 class="center" style="color: white;">Reserve</h3>
+            <h3 class="center" style="color: white;">Booking</h3>
         </div>
         <div class="col-10 pt-3 px-5">
             <% Cinemas.forEach(function(cinema){ %>
                 &emsp;&emsp;
-                <a href="#"><img src="<%= cinema.logo %>" style="width: 150px; overflow: hidden;"></a>
+                <a href="/session/<%= cinema._id %>/<%= Movies._id %>"><img src="<%= cinema.logo %>" style="width: 150px; overflow: hidden;"></a>
                 &emsp;&emsp;&emsp;
             <% }); %>
         </div> 

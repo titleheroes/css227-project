@@ -1,0 +1,49 @@
+<%- include('../partials/header.ejs') %>
+
+<!-- Banner -->
+
+<div class="container-fluid d-flex flex-row px-3 pt-4" style="height: 75px; background-color: rgb(0, 0, 0);">
+    &emsp;
+    <h5 style="color: white; text-transform: uppercase;">
+        <span class="dot" style="background-color: rgb(255, 0, 98); margin-bottom: 1px;"></span>
+        &nbsp;Edit Movies
+    </h5>
+</div>
+<form action="/cinemas/<%= Cinemas._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="container-fluid bg-dark pt-1" style="height: 100%; width: 100%;">
+        <div class="container-fluid mt-5 mb-5" style="width: 800px;">
+            
+            <div class="mb-5">
+                <h5 style="color: white;">Name</h5>
+                <input type="text" class="form-control" name="cinema[name]" placeholder="<%= Cinemas.name %>" value="<%= Cinemas.name %>">
+            </div>
+            <div class="mb-5">
+                <h5 style="color: white;">Slogan</h5>
+                <input type="text" class="form-control" name="cinema[slogan]" placeholder="<%= Cinemas.slogan %>" value="<%= Cinemas.slogan %>">
+            </div>
+
+            <h5 class="mb-3" style="color: white;">Media</h5>
+            <div class="mb-5 mx-3">       
+                <div class="mb-3">
+                    <label class="form-label" style="color: white;">Big scale picture</label>
+                    <img src="<%= Cinemas.image %>" height="300px" style="object-fit: cover;">
+                    <input type="file" class="form-control" name="image" accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" style="color: white;">Logo</label>
+                    <img src="<%= Cinemas.logo %>" height="300px" style="object-fit: cover;">
+                    <input type="file" class="form-control" name="logo" accept="image/*">
+                </div>
+            </div>
+
+            <div style="height: 45px;"></div>
+            <div class="container-fluid" style="height: 100%; position: relative;">
+                <button class="btn btn-outline-light" type="submit" style="height: 50px; width: 100px; bottom: 15px; right: 15px; position: absolute;">Submit</button>
+            </div>
+                
+        </div>
+    </div>
+</form>
+
+
+<%- include('../partials/footer.ejs') %>

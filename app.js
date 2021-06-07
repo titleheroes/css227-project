@@ -26,7 +26,7 @@ app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.use(flash());
 app.set('view engine', 'ejs');
-//seedDB();
+// seedDB();
 
 //Settings Passport
 app.use(require('express-session')({
