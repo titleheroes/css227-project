@@ -94,7 +94,13 @@ router.delete('/:id', function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.redirect('/movies');
+            Liked.remove({'movies.id': req.params.id}, function(err){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.redirect('/movies');
+                }
+            });
         }
     })
 });

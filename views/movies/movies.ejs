@@ -23,7 +23,7 @@
 
 <div class="container-fluid" style="background-color: #0c0041;">
     <div class="row row-cols-3 align-items-stretch py-2 mx-3">
-        
+        <% var i = 0; %>
         <% Movies.forEach(function(movie){ %>
             <div class="col" style="width: 100%">
                 <div class="card card-cover text-white bg-dark rounded-5 shadow-lg">
@@ -34,8 +34,27 @@
                                 <button class="btn btn-outline-warning btn-dark" style="height: 45px; width: 65px;">Edit</button>
                             </a>
                             <form class="col" action="/movies/<%= movie._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-outline-danger btn-dark" style="height: 45px; width: 80px;">Delete</button>
-                            </form>
+                                <button type="button" class="btn btn-outline-danger btn-dark" data-bs-toggle="modal" data-bs-target="#deleteModal<%= i %>" style="height: 45px; width: 80px;">
+                                    Delete
+                                </button>
+                                <div class="modal fade" id="deleteModal<%= i %>" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" style="color: black;">Delete <%= movie.name %> ?</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body" style="color: black;">
+                                                Are you sure you want to delete <%= movie.name %> ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                         
+                                                <button type="submit" class="btn btn-success">Confirm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>  
                         </div>
                     <% } %>
                     <a href="/movies/<%= movie._id %>">
@@ -50,9 +69,8 @@
                     </a>
                 </div>
             </div>
-            
             &ebsp;
-        <% }); %>
+        <% i++; }); %>
       </div>
 </div>
 
@@ -67,6 +85,5 @@
         &emsp;
     </div>
 <% } %>
-
 
 <%- include('../partials/footer.ejs') %>
