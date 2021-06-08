@@ -36,13 +36,13 @@
     </div>
     &ebsp;
 <% }); %>
-<div class="container-fluid px-1 pt-3" style="height: 70px; background-color: rgb(26, 26, 26);">
-    <h4 style="color: white;">
-        &emsp; Admin
-    </h4>
-</div>
-&ebsp;
 <% if ( currentUser.priority == 'superadmin' ) { %>
+    <div class="container-fluid px-1 pt-3" style="height: 70px; background-color: rgb(26, 26, 26);">
+        <h4 style="color: white;">
+            &emsp; Admin
+        </h4>
+    </div>
+    &ebsp;
     <% Admin.forEach(function(user){ %>
         <div style="width: 100%; padding-left: 400px; padding-right: 400px;">
             <div class="card card-cover text-white bg-dark rounded-5 shadow-lg">
