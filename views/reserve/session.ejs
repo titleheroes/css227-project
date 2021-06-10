@@ -97,12 +97,14 @@
             <div class="col container-fluid" style="background-color: rgb(26, 26, 26); height: 120px; position: relative;">
                 <h3 class="center" style="color: white;">Theater 1</h3>
             </div>
-            <div class="col-10 pt-3 px-5">
-                <button id="11" type="submit" name="session[time]" class="sessionTimeButton" value="11:00">11:00</button>
-                <button id="15" type="submit" name="session[time]" class="sessionTimeButton" value="15:00">15:00</button>
-                <button id="18" type="submit" name="session[time]" class="sessionTimeButton" value="18:00">18:00</button>
-                <button id="21" type="submit" name="session[time]" class="sessionTimeButton" value="21:00">21:00</button>
-            </div>  
+            <div class="col-10 pt-5 px-5">
+                <div class="v-center">
+                    <button id="11" type="submit" name="session[time]" class="sessionTimeButton" value="11:00">11:00</button>
+                    <button id="15" type="submit" name="session[time]" class="sessionTimeButton" value="15:00">15:00</button>
+                    <button id="18" type="submit" name="session[time]" class="sessionTimeButton" value="18:00">18:00</button>
+                    <button id="21" type="submit" name="session[time]" class="sessionTimeButton" value="21:00">21:00</button>
+                </div> 
+            </div> 
         </div>
     </div>
     <input type="hidden" name="session[theater]" value="1">
@@ -111,14 +113,16 @@
 
 <!-- ------- Theater 2 ------- -->
 <form action="/session/<%= Cinemas.id %>/<%= Movies.id %>" method="POST">
-    <div class="container-fluid" style="height: 120px; background-color: rgb(41, 41, 41); position: relative;">
+    <div class="container-fluid" style="height: 150px; background-color: rgb(41, 41, 41); position: relative;">
         <div class="row">
-            <div class="col container-fluid" style="background-color: rgb(26, 26, 26); height: 120px; position: relative;">
+            <div class="col-2 container-fluid" style="background-color: rgb(26, 26, 26); height: 150px; position: relative;">
                 <h3 class="center" style="color: white;">Theater 2</h3>
             </div>
-            <div class="col-10 pt-3 px-5">
-                <button id="13" type="submit" name="session[time]" class="sessionTimeButton" value="13:00">13:00</button>
-                <button id="16" type="submit" name="session[time]" class="sessionTimeButton" value="16:00">16:00</button>
+            <div class="col-10 pt-5 px-5">
+                <div class="v-center">
+                    <button id="13" type="submit" name="session[time]" class="sessionTimeButton" value="13:00">13:00</button>
+                    <button id="16" type="submit" name="session[time]" class="sessionTimeButton" value="16:00">16:00</button>
+                </div>
             </div>  
         </div>
     </div>
