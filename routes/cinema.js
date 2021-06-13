@@ -47,7 +47,9 @@ router.post('/new', upload.fields([{ name: 'image' }, { name: 'logo' } ]), funct
     Cinemas.create(req.body.cinema, function(err, newCinemas){
         if(err){
             console.log(err);
+            req.flash('error', err.message);
         } else {
+            req.flash('success', 'Create new cinema');
             res.redirect('/cinemas');
         }
     });
@@ -75,8 +77,10 @@ router.put('/:id', upload.fields([{ name: 'image' }, { name: 'logo' }]), functio
     Cinemas.findByIdAndUpdate(req.params.id, req.body.cinema, function( err, updatedCinemas ){
         if(err) {
             console.log(err);
+            req.flash('error', err.message);
             res.redirect('/cinemas/')
         } else {
+            req.flash('success', 'Edited cinema');
             res.redirect('/cinemas/' + req.params.id);
         }
     });
@@ -88,7 +92,9 @@ router.delete('/:id', function(req, res){
     Cinemas.findByIdAndRemove(req.params.id, function(err){
         if(err){
             console.log(err);
+            req.flash('error', err.message);
         } else {
+            req.flash('success', 'Deleted cinema');
             res.redirect('/cinemas');
         }
     })

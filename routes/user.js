@@ -115,18 +115,25 @@ router.get('/:id', middleware.checkProfileOwner, function (req, res) {
 
 //  Change profile pic
 router.post('/:id', middleware.checkProfileOwner, upload.single('image'), function (req, res){
-    User.findByIdAndUpdate(req.params.id,
-        {
-            picture: '/images/user/' + req.file.filename
-        },
-        function (err, result) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("Updated User : ", result);
-                res.redirect('back');
-            }
-        });
+    if ( req.file ){
+        User.findByIdAndUpdate(req.params.id,
+            {
+                picture: '/images/user/' + req.file.filename
+            },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                    req.flash('error', err.message);
+                } else {
+                    console.log("Updated User : ", result);
+                    req.flash('success', 'Change picture profile');
+                    res.redirect('back');
+                }
+            });
+    }
+    else {
+        res.redirect('back');
+    }
 });
 //  End of Change profile pic
 

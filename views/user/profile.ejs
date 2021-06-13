@@ -10,16 +10,16 @@
     </h5>
 </div>
 <form action="/user/<%= User._id %>" method="POST" enctype="multipart/form-data">
-    <div class="container-fluid d-flex flex-row row px-3 pt-4" style="height: 360px; background-color: rgb(85, 85, 85); position: relative;">
+    <div class="container-fluid d-flex flex-row row px-3 pt-4" style="height: 100%; background-color: rgb(85, 85, 85); position: relative;">
         &emsp;
-        <div class="col-3">
+        <div class="col-md-3 col-sm-6" style="height: 100%;">
             <img src="<%= User.picture %>" height="250px" width="250px">
-            <div style="width: 250px;">
+            <div class="mb-3" style="width: 250px;">
                 &nbsp;
                 <input type="file" class="form-control" name="image" accept="image/*">
             </div>
         </div>
-        <div class="col container-fluid" style="height: 100%;">
+        <div class="col-md col-sm-6 container-fluid" style="height: 100%;">
             <h5 style="font-size: 45px; color: white; text-transform: uppercase;"><%= User.username %></h5>
             <button class="btn btn-outline-success btn-dark btn-large" type="submit" style="height: 60px; width: 130px; bottom: 15px; right: 15px; position: absolute;">Submit</button>
         </div>

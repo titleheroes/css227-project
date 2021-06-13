@@ -49,7 +49,9 @@ router.post('/new', upload.fields([{ name: 'image' }, { name: 'logo' }, { name: 
     Movies.create(req.body.movies, function(err, newMovies){
         if(err){
             console.log(err);
+            req.flash('error', err.message);
         } else {
+            req.flash('success', 'Added new movie');
             res.redirect('/movies');
         }
     });
@@ -62,7 +64,7 @@ router.get('/:id/edit', middleware.checkAdmin,  function(req, res){
         if(err) {
             console.log(err);
         } else {
-            res.render('./movies/edit.ejs', {Movies: foundMovies})
+            res.render('./movies/edit.ejs', {Movies: foundMovies});
         }
     });
 });
@@ -80,8 +82,10 @@ router.put('/:id', upload.fields([{ name: 'image' }, { name: 'logo' }, { name: '
     Movies.findByIdAndUpdate(req.params.id, req.body.movies, function( err, updatedMovies ){
         if(err) {
             console.log(err);
+            req.flash('error', err.message);
             res.redirect('/movies/')
         } else {
+            req.flash('success', 'Edited movie');
             res.redirect('/movies/' + req.params.id);
         }
     });
@@ -97,7 +101,9 @@ router.delete('/:id', function(req, res){
             Liked.remove({'movies.id': req.params.id}, function(err){
                 if(err){
                     console.log(err);
+                    req.flash('error', err.message);
                 } else {
+                    req.flash('success', 'Deleted movie');
                     res.redirect('/movies');
                 }
             });
