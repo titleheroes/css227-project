@@ -6,10 +6,9 @@
         &nbsp;Ticket Collection
     </h5>
 </div>
-
-<div class="container-fluid row mt-3"  style="height: 300px;">
-<% Reserve.forEach(function(thisReserve){ %>
-    <div class="row col-4 mx-3 card card-cover text-white bg-dark rounded-5 shadow-lg h-100">
+<div class="container-fluid row" style="height: 300px;">
+<% descendingReserve.forEach(function(thisReserve){ %>
+    <div class="row col-5 mx-3 mt-2 mb-2 card card-cover text-white bg-dark rounded-5 shadow-lg h-100">
         <div class="col-6">
             <img src="<%= thisReserve.moviesImage %>" height="300px" overflow: hidden;>
         </div>
@@ -26,5 +25,4 @@
     </div>   
 <% }); %>
 </div>
-
 <%- include('../partials/footer.ejs') %>

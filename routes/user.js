@@ -85,11 +85,17 @@ router.get('/:id/ticket', middleware.checkProfileOwner, function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            Reserve.find({'user.id': req.params.id}).exec(function(err, foundReserve){
+            Reserve.find({'user.id': req.params.id}).sort({boughtTime: -1}).exec(function(err, descendingReserve){
                 if (err) {
                     console.log(err);
                 } else {
-                    res.render('./user/ticket.ejs', { User: foundUsers, Reserve: foundReserve });
+                    Reserve.find({'user.id': req.params.id}).sort({boughtTime: 1}).exec(function(err, ascendingReserve){
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.render('./user/ticket.ejs', { User: foundUsers, descendingReserve: descendingReserve, ascendingReserve: ascendingReserve });
+                        }
+                    });
                 }
             });
         }

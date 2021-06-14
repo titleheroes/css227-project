@@ -61,6 +61,10 @@ a {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+.hidden {
+    visibility: hidden;
+}
 /*   End of Public   */
 
 

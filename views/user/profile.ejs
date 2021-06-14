@@ -2,11 +2,11 @@
 
 <!-- Banner -->
 
-<div class="container-fluid d-flex flex-row px-3 pt-4" style="height: 75px; background-color: rgb(0, 0, 0);">
+<!-- <div class="container-fluid d-flex flex-row px-3 pt-4" style="height: 75px; background-color: rgb(0, 0, 0);">
     &emsp;
     <h5 style="color: white; text-transform: uppercase;">
         <span class="dot" style="background-color: rgb(0, 255, 106); margin-bottom: 1px;"></span>
-        &nbsp;PROFILE
+        &nbsp;WELCOME
     </h5>
 </div>
 <form action="/user/<%= User._id %>" method="POST" enctype="multipart/form-data">
@@ -24,7 +24,7 @@
             <button class="btn btn-outline-success btn-dark btn-large" type="submit" style="height: 60px; width: 130px; bottom: 15px; right: 15px; position: absolute;">Submit</button>
         </div>
     </div>
-</form>
+</form> -->
 
 <!-- Banner -->
 
@@ -38,9 +38,16 @@
 
 <div class="container-fluid" style="height: 330px; background-color: #0c0041;">
     <div class="row row-cols-3 align-items-stretch py-2 mx-3">
-        <% Movies.likes.forEach(function(liked){ %>
+        <% var i = 0; Movies.likes.forEach(function(liked){ %>
             <div class="col" style="width: 100%">
                 <div class="card card-cover text-white bg-dark rounded-5 shadow-lg">
+                    <div style="position: absolute; right: 15px; top: 15px;">
+                        <form action="/movies/<%= liked._id %>/unlike" method="POST">
+                            <button type="submit" class="btn btn-outline-danger btn-dark" style="height: 45px; width: 100%;">
+                                Remove from favourite
+                            </button>
+                        </form>
+                    </div>
                     <a href="/movies/<%= liked.movies.id %>">
                         <div class="row">
                             <div class="col-2 mx-3 d-none d-lg-block">
@@ -55,7 +62,7 @@
                 </div>
             </div>
             &nbsp;
-        <% }); %>
+        <% i++; }); %>
     </div>
 </div>
 

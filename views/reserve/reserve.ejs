@@ -157,9 +157,9 @@
 <!-- End of Reservation Form -->
 
 <script>
-    var price = 0; seat = 0;
+    var price = 0; seat = 0; reserveSeat = [];
 
-    document.getElementById("seat").innerHTML = seat;
+    document.getElementById("seat").innerHTML = reserveSeat;
     document.getElementById("price").innerHTML = price;
 
     if ( seat > 0 ) {
@@ -177,7 +177,8 @@
             seat += 1;
             price += 80;
 
-            document.getElementById("seat").innerHTML = seat;
+            reserveSeat.push(selectedSeat);
+            document.getElementById("seat").innerHTML = reserveSeat;
             document.getElementById("price").innerHTML = price;
         }
         else if(document.getElementById('i' + selectedSeat).value == 'y'){
@@ -187,7 +188,12 @@
             seat -= 1;
             price -= 80;
 
-            document.getElementById("seat").innerHTML = seat;
+            for ( var i = 0; i <= reserveSeat.length; i++) {
+                if (selectedSeat === reserveSeat[i]) {
+                    reserveSeat.splice(i, 1);
+                }
+            }
+            document.getElementById("seat").innerHTML = reserveSeat;
             document.getElementById("price").innerHTML = price;
         }
 
