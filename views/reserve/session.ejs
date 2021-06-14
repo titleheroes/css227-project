@@ -127,6 +127,7 @@
         </div>
     </div>
     <input type="hidden" name="session[theater]" value="2">
+    <input type="hidden" name="session[date]" id="dateTheater2" value="<%= D1 %>">
 </form>
 <!-- ------- End of Theater 2 ------- -->
 
@@ -164,6 +165,7 @@
     }
 
     function check(checkSelectDay) {
+        document.getElementById('dateTheater2').value = checkSelectDay;
         if ( today == checkSelectDay ) {
             if ( hours >= 11 && minutes > 15 || hours > 11 ){
                 document.getElementById("11").disabled = true;

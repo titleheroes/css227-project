@@ -99,6 +99,7 @@ a {
 
 .rank-no {
     position: absolute;
+    top: 0;
     color: #55ffb0;
     font-size: 120px;
     font-weight: bolder;
