@@ -1,5 +1,9 @@
 <%- include('../partials/header.ejs') %>
 
+<% var weekday = new Array(7), month = new Array(12); %>
+<% weekday[0] = "Sun", weekday[1] = "Mon", weekday[2] = "Tues", weekday[3] = "Wed", weekday[4] = "Thurs", weekday[5] = "Fri", weekday[6] = "Sat"; %>
+<% month[0] = "Jan", month[1] = "Feb",month[2] = "Mar", month[3] = "Apr", month[4] = "May", month[5] = "June", month[6] = "July", month[7] = "Aug", month[8] = "Sept", month[9] = "Oct", month[10] = "Nov", month[11] = "Dec";  %>
+
 <div class="container-fluid" style="background-color: #424242;">
     <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -94,8 +98,11 @@
                 </form>
             <% } %>
             &emsp; <%= comment.text %>
-            <p class="pt-3 mb-3 text-end">
-                <%= comment.date %>
+            <p class="pt-2 text-end">
+                <% var commentDate = comment.date %>
+                <% var Day = commentDate.getDay(), Month = commentDate.getMonth(), Date = commentDate.getDate(); %>
+                <% var thisDate = weekday[Day] + ' ' + Date + ' ' + month[Month] %>
+                <span style="font-weight: bold;">Commented date : </span><%= thisDate %>
             </p>
         </div>
         <div class="container-fluid" style="height: 20px; background-color: #0c0041;"></div>
